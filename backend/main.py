@@ -46,7 +46,7 @@ def home():
         transcript, img_url = get_transcript(youtube_url)
         if transcript:
             # Generate the blog post using Gemini
-            prompt = f"Create this a blog: {transcript}"
+            prompt = f"Create this a blog and remove any part related to sponsorships create multiple small headings(h3), these should be relevent. It should have a catchy intresting title(h2) in the start: {transcript}"
             model_name = "gemini-1.5-pro"
             generation_config = {}  
             model = genai.GenerativeModel(model_name=model_name, generation_config=generation_config)

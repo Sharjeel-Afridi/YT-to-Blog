@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -22,4 +27,31 @@ button {
 button:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
+}
+
+
+.blog-post{
+  line-height: 32px;
+  letter-spacing: -0.003em;
+  margin-top: 2.14em;
+  font-size: 20px;
+  width: 100%;
+  
+}
+.blog-post > h2{
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 52px;
+  margin-bottom: 4rem; 
+}
+.blog-post > h3{
+  font-size: 2rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+}
+.blog-post > p{
+  margin-bottom: 1rem;
+  letter-spacing: -0.009em;
+  font-family: source-serif-pro;
 }
