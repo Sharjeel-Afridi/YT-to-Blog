@@ -74,6 +74,10 @@ cd <repository-folder>
    ```
 
 ---
+### Create .env in root
+```bash
+   GENAI_API_KEY = "your gemini api key"
+   ```
 
 ## 🌐 Usage
 
