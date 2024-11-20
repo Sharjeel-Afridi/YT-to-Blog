@@ -25,7 +25,8 @@ def get_youtube_video_id(url):
 def get_transcript(url):
     video_id = get_youtube_video_id(url)
     img_url = f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
-    transcript_list = YouTubeTranscriptApi.get_transcript(video_id)
+    # transcript_list = YouTubeTranscriptApi.get_transcript(video_id)
+    transcript_list = YouTubeTranscriptApi.get_transcript(video_id, proxies={"https": "http://localhost:8080"})
     transcript_text = " ".join(entry['text'] for entry in transcript_list)
     return [transcript_text, img_url]
 
