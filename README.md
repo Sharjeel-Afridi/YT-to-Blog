@@ -1,36 +1,84 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![image](https://github.com/user-attachments/assets/404caea7-03a1-4124-a271-5735b515c259)
 
-## Getting Started
 
-First, run the development server:
+# YouTube to Blog Post Generator
 
+### AI-Powered Blog Generator from YouTube Videos
+
+This **Next.js** and **Flask** application transforms YouTube video URLs into **AI-generated blog posts** with integrated video thumbnails. It offers a streamlined workflow, combining robust backend logic with a polished frontend experience.
+
+#### Key Features:
+- **Markdown to HTML Conversion**: Automatically converts AI-generated content into styled HTML for seamless rendering.
+- **YouTube Transcript Processing**:  
+  - Extracts the **Video ID** from the provided URL.  
+  - Fetches the video transcript and preprocesses it by **removing unwanted formatting** or artifacts for clean input.
+- **AI-Powered Content Generation**: Uses the processed transcript to create **engaging, structured blog posts**.
+- 
+This project demonstrates the integration of advanced AI processing with clean, user-friendly web design, offering a powerful tool for content creators.
+
+![Screenshot 2024-11-21 000704](https://github.com/user-attachments/assets/43f2e3be-5c2c-44c3-83ff-46dfd3fb7cd9)
+
+## 🚀 Features
+
+- Convert YouTube video content into well-written blog posts.
+- Automatically fetch video thumbnails.
+- AI-powered blog generation using Flask backend.
+- Markdown to styled HTML conversion.
+- Responsive and user-friendly interface.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend**: [Next.js](https://nextjs.org/) with Tailwind CSS
+- **Backend**: [Flask](https://flask.palletsprojects.com/)
+
+---
+
+## 📦 Installation and Setup
+
+### Prerequisites
+
+- Node.js (v14+)
+- Python (v3.8+)
+- A Gemini API Key
+
+### 1. Clone the repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd <repository-folder>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Frontend Setup
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 3. Backend Setup
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Start the Flask server:
+   ```bash
+   python app.py
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🌐 Usage
 
-To learn more about Next.js, take a look at the following resources:
+1. Enter a valid YouTube URL in the input box.
+2. Click **Generate Blog**.
+3. View the AI-generated blog post along with the video thumbnail.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
