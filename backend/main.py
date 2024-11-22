@@ -5,10 +5,15 @@ import google.generativeai as genai
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv
+import requests
 
 # Initialize Flask app
 app = Flask(__name__)
 CORS(app)
+
+
+
+
 # YouTube Video ID Extraction Function
 def get_youtube_video_id(url):
     video_id_regex_list = [
@@ -23,12 +28,21 @@ def get_youtube_video_id(url):
 
 # Function to get transcript from YouTube video
 def get_transcript(url):
+
     video_id = get_youtube_video_id(url)
+    url = "https://youtube-transcriptor.p.rapidapi.com/transcript"
+    querystring = {"video_id":video_id,"lang":"en"}
+    headers = {
+        "x-rapidapi-key": os.getenv("RAPID_API_KEY"),
+        "x-rapidapi-host": "youtube-transcriptor.p.rapidapi.com"
+    }
+    response = requests.get(url, headers=headers, params=querystring)
+
     img_url = f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
-    # transcript_list = YouTubeTranscriptApi.get_transcript(video_id)
-    transcript_list = YouTubeTranscriptApi.get_transcript(video_id, proxies={"https": "https://brd-customer-hl_a3f50ceb-zone-residential_proxy1:woitw5s0z79f@brd.superproxy.io:33335"})
-    transcript_text = " ".join(entry['text'] for entry in transcript_list)
-    return [transcript_text, img_url]
+    transcript_list = response.json()
+    transcript_text = " ".join(entry['description'] for entry in transcript_list)
+   
+    return [ transcript_text, img_url]
 
 load_dotenv()
 
@@ -64,4 +78,4 @@ def home():
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(host='0.0.0.0', port=port, debug=True)
