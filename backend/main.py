@@ -9,7 +9,7 @@ import requests
 
 # Initialize Flask app
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "https://yt-to-blog.vercel.app"}})
 
 
 
@@ -40,6 +40,7 @@ def get_transcript(url):
 
     img_url = f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
     transcript_list = response.json()
+    print(transcript_list)
     transcript_text = " ".join(entry['description'] for entry in transcript_list)
    
     return [ transcript_text, img_url]
