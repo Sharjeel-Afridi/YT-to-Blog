@@ -1,5 +1,5 @@
 import re
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from youtube_transcript_api import YouTubeTranscriptApi
 import google.generativeai as genai
 from flask_cors import CORS
@@ -7,8 +7,20 @@ import os
 from dotenv import load_dotenv
 
 # Initialize Flask app
-app = Flask(__name__)
+app = Flask(__name__,
+            template_folder='client/dist',
+            static_folder='client/dist/assets',
+            static_url_path='/assets')
 CORS(app)
+
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/<path:path>')
+def assets(path):
+    return app.send_static_file('client/dist/'+path)
 # YouTube Video ID Extraction Function
 def get_youtube_video_id(url):
     video_id_regex_list = [
@@ -22,7 +34,7 @@ def get_youtube_video_id(url):
     return None
 
 # Function to get transcript from YouTube video
-def get_transcript(url):
+def get_transcript(url: str) -> list[str]:
     video_id = get_youtube_video_id(url)
     img_url = f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
     transcript_list = YouTubeTranscriptApi.get_transcript(video_id)
@@ -36,14 +48,19 @@ KEY = os.getenv("GENAI_API_KEY")
 genai.configure(api_key=KEY)
 
 # Route for handling POST requests
-@app.route("/", methods=["POST"])
+@app.route("/blog", methods=["POST"])
 def home():
+    
+
     data = request.get_json()  
     youtube_url = data.get('youtube_url')
 
     if youtube_url:
         # Fetch the transcript and video thumbnail
-        transcript, img_url = get_transcript(youtube_url)
+        try:
+            transcript, img_url = get_transcript(youtube_url)
+        except Exception as err:
+            return str(err)
         if transcript:
             # Generate the blog post using Gemini
             prompt = f"Create this a blog and remove any part related to sponsorships create multiple small headings(h3), these should be relevent. It should have a catchy intresting title(h2) in the start: {transcript}"
@@ -63,4 +80,4 @@ def home():
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(host='0.0.0.0', port=port, debug=True)
