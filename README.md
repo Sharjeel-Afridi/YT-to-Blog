@@ -77,7 +77,10 @@ cd <repository-folder>
 ### Create .env in root
 ```bash
    GENAI_API_KEY = "your gemini api key"
+   RAPID_API_KEY = "your rapid api key"
    ```
+
+### MAKE SURE THE FETCH URL IS LOCALHOST:5000 IN PAGE.JS WHILE RUNNING LOCALLY.
 
 ## 🌐 Usage
 
